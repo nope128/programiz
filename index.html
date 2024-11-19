@@ -4,6 +4,10 @@
 <head>
   <title>
     Online C++ Compiler - Programiz  </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+
+  <!-- Include Prism.js JS for syntax highlighting functionality -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/prism.min.js"></script>
   <link rel="shortcut icon" href="https://www.programiz.com/sites/tutorial2program/files/favicon.png" />
   <link rel="stylesheet" href="https://fonts.programiz.com/fonts.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
@@ -609,12 +613,17 @@
           class="change-lang-btn csharp " title="Online C# Compiler">
           <img class="change-lang-btn-icon svg" src="https://cdn.playground-v2.programiz.com/assets/icons/csharp.svg" alt="C# Online" />
         </a>
-        <a target="_blank"
-          href="https://www.programiz.com/javascript/online-compiler/"
-          class="change-lang-btn javascript "
-          title="Online JavaScript Compiler (Editor)">
-          <img class="change-lang-btn-icon svg" src="https://cdn.playground-v2.programiz.com/assets/icons/javascript.svg" alt="JavaScript Online" />
-        </a>
+        
+        <button
+  class="change-lang-btn javascript" 
+  title="Online JavaScript Compiler (Editor)" 
+  onclick="cycleCode()">
+  <img 
+    class="change-lang-btn-icon svg" 
+    src="https://cdn.playground-v2.programiz.com/assets/icons/javascript.svg" 
+    alt="JavaScript Online" />
+</button>
+
         <a target="_blank"
           href="https://www.programiz.com/golang/online-compiler/"
           class="change-lang-btn golang "
@@ -676,16 +685,8 @@
         <button class="mobile-run-button run">
           Run
         </button>
-        <div id="editor">// Online C++ compiler to run C++ program online
-#include <iostream>
+        <pre id="editor"></pre>         
 
-int main() {
-    // Write C++ code here
-    std::cout << "Try programiz.pro";
-
-    return 0;
-}</div>
-      </div>
 
       <div class="terminal-wrapper">
         <div class="terminal-desktop-top-bar">
@@ -731,7 +732,7 @@ int main() {
     const utm = "utm_source=compiler-nav&utm_campaign=programiz&utm_medium=referral"
     const baseURL = `https://programiz.pro?${utm}`
 
-    desktopAdsButton.innerHTML = `Programiz PRO â¯`;
+    desktopAdsButton.innerHTML = `Programiz PRO `;
     mobileAdsButton.innerHTML = `Programiz PRO`;
     desktopAdsButton.href = baseURL;
     mobileAdsButton.href = baseURL;
@@ -754,6 +755,854 @@ int main() {
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TKXT7MH" height="0" width="0"
       style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
+  <script>
+    // JavaScript object holding code snippets for each option
+    const codeSnippets =[`// Online C compiler to run C program online
+#include <stdio.h>
+
+int main() {
+    // Write C code here
+    printf("Try programiz.pro");
+
+    return 0;
+}`,
+`#No.1 Bubble Sort
+#include <iostream>
+#include <chrono>
+#include <ctime>
+
+using namespace std;
+
+void bubbleSort(int arr[], int n) {
+    bool swapped;
+    for (int i = 0; i < n - 1; i++) {
+        swapped = false;
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                swap(arr[j], arr[j + 1]);
+                swapped = true;
+            }
+        }
+        if (!swapped) {
+            break;
+        }
+    }
+}
+
+void printArray(int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}
+
+int main() {
+    int arr[] = {64, 34, 25, 12, 22, 11, 90};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    cout << "Unsorted array: ";
+    printArray(arr, n);
+
+    auto start = chrono::high_resolution_clock::now();
+    bubbleSort(arr, n);
+    auto stop = chrono::high_resolution_clock::now();
+
+    cout << "Sorted array: ";
+    printArray(arr, n);
+
+    auto duration = chrono::duration_cast<chrono::nanoseconds>(stop - start).count();
+    cout << "Time taken is " << duration << " nanoseconds" << endl;
+
+    return 0;
+}]`, `[
+#No.2 Merge Sort
+#include <iostream>
+#include <chrono>
+#include <ctime>
+
+using namespace std;
+
+void mergesort(int arr[], int s, int e);
+void merge(int arr[], int s, int m, int e);
+void printArray(int arr[], int size);
+
+int main() {
+    int arr[] = {9, 8, 11, 4, 6, 3, 10, 13, 23, 1, 45, 16, 22, 29, 30, 35};
+    int size = sizeof(arr) / sizeof(arr[0]);
+
+    auto start = chrono::high_resolution_clock::now();
+    mergesort(arr, 0, size - 1);
+    auto stop = chrono::high_resolution_clock::now();
+
+    cout << "Sorted array: " << endl;
+    printArray(arr, size);
+
+    auto duration = chrono::duration_cast<chrono::nanoseconds>(stop - start).count();
+    cout << "Time taken is " << duration << " nanoseconds" << endl;
+
+    return 0;
+}
+
+void mergesort(int arr[], int s, int e) {
+    if (s < e) {
+        int mid = (s + e) / 2;
+        mergesort(arr, s, mid);
+        mergesort(arr, mid + 1, e);
+
+        merge(arr, s, mid, e);
+    }
+}
+
+void merge(int arr[], int s, int m, int e) {
+    int n1 = m - s + 1;
+    int n2 = e - m;
+
+    int L[n1], M[n2];
+
+    for (int i = 0; i < n1; i++)
+        L[i] = arr[s + i];
+    for (int j = 0; j < n2; j++)
+        M[j] = arr[m + 1 + j];
+
+    int i = 0, j = 0, k = s;
+
+    while (i < n1 && j < n2) {
+        if (L[i] <= M[j]) {
+            arr[k] = L[i];
+            i++;
+        } else {
+            arr[k] = M[j];
+            j++;
+        }
+        k++;
+    }
+
+    while (i < n1) {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+
+    while (j < n2) {
+        arr[k] = M[j];
+        j++;
+        k++;
+    }
+}
+
+void printArray(int arr[], int size) {
+    for (int i = 0; i < size; i++)
+        cout << arr[i] << " ";
+    cout << endl;
+}]`, `[#No.3 Recursive Binary Search
+    #include <iostream>
+#include <chrono>
+#include <ctime>
+
+using namespace std;
+
+int binary_search(int arr[], int low, int high, int query);
+
+int main() {
+    auto start = chrono::high_resolution_clock::now();
+
+    int arr[] = {2, 8, 12, 23, 30, 32, 43, 45, 51, 59, 65, 67, 78, 80, 85, 88, 92, 99, 100, 112, 120, 125, 130, 135, 140, 145, 150, 155, 160, 165};
+    int query = 165;
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    cout << "Array size: " << n << endl;
+
+    int result = binary_search(arr, 0, n - 1, query);
+
+    if (result != -1)
+        cout << "Element is present at index " << result << endl;
+    else
+        cout << "Element is not present" << endl;
+
+    auto stop = chrono::high_resolution_clock::now();
+    auto duration = chrono::duration_cast<chrono::nanoseconds>(stop - start).count();
+
+    cout << "Duration is " << duration << " nanoseconds" << endl;
+
+    return 0;
+}
+
+int binary_search(int arr[], int low, int high, int query) {
+    if (high >= low) {
+        int mid = low + (high - low) / 2;
+
+        if (arr[mid] == query)
+            return mid;
+
+        if (arr[mid] > query)
+            return binary_search(arr, low, mid - 1, query);
+
+        return binary_search(arr, mid + 1, high, query);
+    }
+
+    return -1;
+}]`, `[#No.4 Insertion Sort
+    #include <iostream>
+#include <chrono>
+#include <ctime>
+
+using namespace std;
+
+void InsertionSort(int arr[], int size);
+
+int main() {
+    auto start = chrono::high_resolution_clock::now();
+
+    int arr[] = {2, 6, 23, 1, 4, 46, 12};
+    int size = sizeof(arr) / sizeof(arr[0]);
+
+    InsertionSort(arr, size);
+
+    auto stop = chrono::high_resolution_clock::now();
+    auto duration = chrono::duration_cast<chrono::nanoseconds>(stop - start).count();
+
+    cout << "\nDuration = " << duration << " nanoseconds" << endl;
+
+    return 0;
+}
+
+void InsertionSort(int arr[], int size) {
+    int i, j, key;
+
+    for (i = 1; i < size; i++) {
+        key = arr[i];
+        j = i - 1;
+
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j = j - 1;
+        }
+
+        arr[j + 1] = key;
+    }
+
+    for (int a = 0; a < size; a++) {
+        cout << arr[a] << "\t";
+    }
+}]`, `[#No.5 Quick Sort
+    #include <iostream>
+using namespace std;
+
+void swap(int *a, int *b) {
+    int t = *a;
+    *a = *b;
+    *b = t;
+}
+
+void printArray(int array[], int size) {
+    for (int i = 0; i < size; i++)
+        cout << array[i] << " ";
+    cout << endl;
+}
+
+int partition(int array[], int low, int high) {
+    int pivot = array[high];
+    int i = (low - 1);
+
+    for (int j = low; j < high; j++) {
+        if (array[j] <= pivot) {
+            i++;
+            swap(&array[i], &array[j]);
+        }
+    }
+    swap(&array[i + 1], &array[high]);
+    return (i + 1);
+}
+
+void quickSort(int array[], int low, int high) {
+    if (low < high) {
+        int pi = partition(array, low, high);
+
+        quickSort(array, low, pi - 1);
+        quickSort(array, pi + 1, high);
+    }
+}
+
+int main() {
+    int data[] = {8, 7, 6, 1, 0, 9, 2};
+    int n = sizeof(data) / sizeof(data[0]);
+
+    cout << "Unsorted Array:\n";
+    printArray(data, n);
+
+    quickSort(data, 0, n - 1);
+
+    cout << "Sorted array in ascending order:\n";
+    printArray(data, n);
+
+    return 0;
+}]`, `[#No.6 Dijsktra
+    #include <iostream>
+using namespace std;
+
+#define V 5
+#define inf 10000000
+int minDistance(int dist[], bool sptSet[]) {
+    int min = inf, min_index;
+
+    for (int v = 0; v < V; v++)
+        if (!sptSet[v] && dist[v] <= min)
+            min = dist[v], min_index = v;
+
+    return min_index;
+}
+
+void printSolution(int dist[]) {
+    cout << "Vertex \t Distance from Source" << endl;
+    for (int i = 0; i < V; i++)
+        cout << i+1 << " \t\t\t\t" << dist[i] << endl;
+}
+
+void dijkstra(int graph[V][V], int src) {
+    int dist[V];
+    bool sptSet[V];
+
+    for (int i = 0; i < V; i++)
+        dist[i] = inf, sptSet[i] = false;
+
+    dist[src] = 0;
+
+    for (int count = 0; count < V - 1; count++) {
+        int u = minDistance(dist, sptSet);
+
+        sptSet[u] = true;
+
+        for (int v = 0; v < V; v++)
+            if (!sptSet[v] && graph[u][v] && dist[u] != inf && dist[u] + graph[u][v] < dist[v])
+                dist[v] = dist[u] + graph[u][v];
+    }
+
+    printSolution(dist);
+}
+
+int main() {
+    int graph[V][V] = { 
+        { 0, 4, 0, 0, 0},
+        { 4, 0, 8, 0, 0},
+        { 0, 8, 0, 7, 0},
+        { 0, 0, 7, 0, 9},
+    };
+
+    dijkstra(graph, 0);
+
+    return 0;
+}]`, `#No. 7 Strassen's
+    #include<iostream>
+using namespace std;
+int main() {
+   int z[2][2];
+   int i, j;
+   int m1, m2, m3, m4 , m5, m6, m7;
+      int x[2][2] = {
+         {12, 34}, 
+         {22, 10}
+      };
+   int y[2][2] = {
+      {3, 4}, 
+      {2, 1}
+   };
+   cout<<"The first matrix is: ";
+   for(i = 0; i < 2; i++) {
+      cout<<endl;
+      for(j = 0; j < 2; j++)
+         cout<<x[i][j]<<" ";
+   }
+   cout<<"\nThe second matrix is: ";
+   for(i = 0;i < 2; i++){
+      cout<<endl;
+      for(j = 0;j < 2; j++)
+         cout<<y[i][j]<<" ";
+   }
+
+   m1 = (x[0][0] + x[1][1]) * (y[0][0] + y[1][1]);
+   m2 = (x[1][0] + x[1][1]) * y[0][0];
+   m3 = x[0][0] * (y[0][1] - y[1][1]);
+   m4 = x[1][1] * (y[1][0] - y[0][0]);
+   m5 = (x[0][0] + x[0][1]) * y[1][1];
+   m6 = (x[1][0] - x[0][0]) * (y[0][0]+y[0][1]);
+   m7 = (x[0][1] - x[1][1]) * (y[1][0]+y[1][1]);
+
+   z[0][0] = m1 + m4- m5 + m7;
+   z[0][1] = m3 + m5;
+   z[1][0] = m2 + m4;
+   z[1][1] = m1 - m2 + m3 + m6;
+
+   cout<<"\nProduct achieved using Strassen's algorithm: ";
+   for(i = 0; i < 2 ; i++) {
+      cout<<endl;
+      for(j = 0; j < 2; j++)
+         cout<<z[i][j]<<" ";
+   }
+   return 0;
+} `, `[#No.8 Fractional Knapsack
+    #include <iostream>
+#include <algorithm>
+using namespace std;
+struct Item {
+    int weight;
+    int value;
+    int index;
+};
+bool compare(Item a, Item b) {
+    double r1 = (double)a.value / a.weight;
+    double r2 = (double)b.value / b.weight;
+    return r1 > r2;
+}
+double fractionalKnapsack(int W, Item items[], int n) {
+    sort(items, items + n, compare);
+    double totalValue = 0.0;
+    cout << "\nItems taken in the knapsack:\n";
+    for (int i = 0; i < n; i++) {
+        if (items[i].weight <= W) {
+            W -= items[i].weight;
+            totalValue += items[i].value;
+            cout << "Item " << items[i].index << " (Weight: " << items[i].weight 
+                 << ", Profit: " << items[i].value << ") taken fully.\n";
+        } else {
+            double fraction = (double)W / items[i].weight;
+            totalValue += items[i].value * fraction;
+            cout << "Item " << items[i].index << " (Weight: " << items[i].weight 
+                 << ", Profit: " << items[i].value << ") taken partially (" 
+                 << fraction * 100 << "%).\n";
+            break;
+        }
+    }
+    return totalValue;
+}
+int main() {
+    int W, n;
+    cout << "Enter the maximum capacity of the knapsack: ";
+    cin >> W;
+    cout << "Enter the number of items: ";
+    cin >> n;
+    Item items[n];
+    for (int i = 0; i < n; i++) {
+        cout << "Enter weight and Profit of item " << i + 1 << ": ";
+        cin >> items[i].weight >> items[i].value;
+        items[i].index = i + 1;
+    }
+    double maxValue = fractionalKnapsack(W, items, n);
+    cout << "\nMaximum value in Knapsack = " << maxValue << endl;
+    return 0;
+}]`, `[#No.9 0/1 Knapsack
+    #include <iostream>
+#include <chrono>
+#include <vector>
+#include <iomanip> 
+using namespace std;
+int knapSack(int W, int wt[], int val[], int n)
+{
+    vector<vector<int>> dp(n + 1, vector<int>(W + 1, 0));
+
+    for (int i = 1; i <= n; ++i) {
+        for (int w = 1; w <= W; ++w) {
+            if (wt[i - 1] <= w) {
+                dp[i][w] = max(dp[i - 1][w], val[i - 1] + dp[i - 1][w - wt[i - 1]]);
+            } else {
+                dp[i][w] = dp[i - 1][w];
+            }
+        }
+    }
+    cout << "DP Table:\n";
+    for (int i = 0; i <= n; ++i) {
+        for (int w = 0; w <= W; ++w) {
+            cout << setw(6) << dp[i][w];
+        }
+        cout << endl;
+    }
+    return dp[n][W];
+}
+int main()
+{
+    int profit[] = {1, 3, 2, 5, 7, 2};
+    int weight[] = {2, 4, 1, 3, 4, 2};
+    int W = 10;
+    int n = sizeof(profit) / sizeof(profit[0]);
+    auto start = chrono::high_resolution_clock::now();
+    int maxProfit = knapSack(W, weight, profit, n);
+    auto end = chrono::high_resolution_clock::now();
+    chrono::duration<double, milli> duration = end - start;
+    cout << "Maximum profit: " << maxProfit << endl;
+    cout << "Time taken: " << duration.count() << " ms" << endl;
+    return 0;
+}]`, `[#No.10 Kruskal
+    #include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+struct Edge {
+    int src, dest, weight;
+};
+
+
+const int E = 5; 
+const int V = 4; 
+
+bool compareEdges(const Edge& a, const Edge& b) {
+    return a.weight < b.weight;
+}
+
+class DisjointSet {
+public:
+    DisjointSet(int n) {
+        for (int i = 0; i < n; i++)
+            parent[i] = i;
+    }
+
+    int find(int u) {
+        if (parent[u] != u)
+            parent[u] = find(parent[u]);
+        return parent[u];
+    }
+
+    void unionSets(int u, int v) {
+        parent[find(u)] = find(v);
+    }
+
+private:
+    int parent[100]; 
+};
+
+
+void kruskal(Edge edges[E]) {
+    Edge result[E];
+    DisjointSet ds(V);
+
+  
+    sort(edges, edges + E, compareEdges);
+
+    int e = 0;
+    for (int i = 0; i < E; i++) {
+        if (ds.find(edges[i].src) != ds.find(edges[i].dest)) {
+            ds.unionSets(edges[i].src, edges[i].dest);
+            result[e++] = edges[i];
+        }
+    }
+
+
+    cout << "Edges in the Minimum Spanning Tree:\n";
+    for (int i = 0; i < e; i++) {
+        cout << result[i].src << " -- " << result[i].dest << " == " << result[i].weight << "\n";
+    }
+}
+
+int main() {
+    
+    Edge edges[E] = {
+        {0, 1, 10},
+        {0, 2, 6},
+        {0, 3, 5},
+        {1, 3, 15},
+        {2, 3, 4}
+    };
+
+    kruskal(edges);
+
+    return 0;
+}]`, `[#No.11 Prim's
+    #include <iostream>
+#include <limits>
+#define MAX_VERTICES 100
+using namespace std;
+
+int minKey(int key[], bool inMST[], int V) {
+    int min = numeric_limits<int>::max();
+    int min_index;
+
+    for (int v = 0; v < V; v++) {
+        if (!inMST[v] && key[v] < min) {
+            min = key[v];
+            min_index = v;
+        }
+    }
+    return min_index;
+}
+
+void primMST(int graph[MAX_VERTICES][MAX_VERTICES], int V) {
+    int parent[MAX_VERTICES];
+    int key[MAX_VERTICES];
+    bool inMST[MAX_VERTICES];
+
+    // Initialize arrays
+    for (int i = 0; i < V; i++) {
+        key[i] = numeric_limits<int>::max();
+        inMST[i] = false;
+        parent[i] = -1;
+    }
+
+    key[0] = 0;
+    parent[0] = -1;
+
+    // Construct the MST
+    for (int count = 0; count < V - 1; count++) {
+        int u = minKey(key, inMST, V);
+        inMST[u] = true;
+
+        for (int v = 0; v < V; v++) {
+            if (graph[u][v] && !inMST[v] && graph[u][v] < key[v]) {
+                parent[v] = u;
+                key[v] = graph[u][v];
+            }
+        }
+    }
+
+    // Print the MST
+    cout << "Edge \tWeight\n";
+    for (int i = 1; i < V; i++) {
+        cout << parent[i] << " - " << i << "\t" << graph[i][parent[i]] << " \n";
+    }
+}
+
+int main() {
+    int graph[MAX_VERTICES][MAX_VERTICES] = {0};
+    int V, E;
+
+    cout << "Enter the number of vertices: ";
+    cin >> V;
+
+    cout << "Enter the number of edges: ";
+    cin >> E;
+
+    cout << "Enter the edges in the format (u v weight):" << endl;
+    for (int i = 0; i < E; i++) {
+        int u, v, weight;
+        cin >> u >> v >> weight;
+        graph[u][v] = weight;
+        graph[v][u] = weight;
+    }
+
+    primMST(graph, V);
+    return 0;
+}]`, `[#No.12 BFS
+    #include <iostream>
+#include <queue>
+#include <vector>
+using namespace std;
+
+void bfs(vector<vector<int>>& adj, int s) {
+    queue<int> q;
+    vector<bool> visited(adj.size(), false);
+    visited[s] = true;
+    q.push(s);
+
+    while (!q.empty()) {
+        int curr = q.front();
+        q.pop();
+        cout << curr << " ";
+
+        for (int x : adj[curr]) {
+            if (!visited[x]) {
+                visited[x] = true;
+                q.push(x);
+            }
+        }
+    }
+}
+
+void addEdge(vector<vector<int>>& adj, int u, int v) {
+    adj[u].push_back(v);
+    adj[v].push_back(u);
+}
+
+int main() {
+    int V = 6; 
+    vector<vector<int>> adj(V);
+
+
+    addEdge(adj, 0, 1);
+    addEdge(adj, 0, 2);
+    addEdge(adj, 1, 3);
+    addEdge(adj, 1, 4);
+    addEdge(adj, 2, 5);
+    
+    cout << "BFS starting from 3 : \n";
+    bfs(adj, 3);
+
+    return 0;
+}]`, `[#No.13 DFS
+    #include <iostream>
+#include <vector>
+using namespace std;
+
+void dfs(int node, vector<bool> &visited, const vector<vector<int>> &adjList) {
+    visited[node] = true;
+    cout << node << " ";
+
+    for (int neighbor : adjList[node]) {
+        if (!visited[neighbor]) {
+            dfs(neighbor, visited, adjList);
+        }
+    }
+}
+
+int main() {
+    int numNodes, numEdges;
+
+    cout << "Enter the number of nodes: ";
+    cin >> numNodes;
+
+    cout << "Enter the number of edges: ";
+    cin >> numEdges;
+
+    vector<vector<int>> adjList(numNodes);
+
+    cout << "Enter the edges (format: node1 node2):" << endl;
+    for (int i = 0; i < numEdges; i++) {
+        int u, v;
+        cin >> u >> v;
+        adjList[u].push_back(v);
+        adjList[v].push_back(u);
+    }
+
+    vector<bool> visited(numNodes, false);
+
+    cout << "DFS Traversal starting from node 0: ";
+    dfs(0, visited, adjList);
+    cout << endl;
+
+    return 0;
+}]`, `[#No.14 N Queen's
+    #include <iostream>
+#include <vector>
+using namespace std;
+
+void printSolution(vector<vector<int>>& board) {
+    int n = board.size();
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (board[i][j])
+                cout << "Q ";
+            else
+                cout << ". ";
+        }
+        cout << "\n";
+    }
+}
+
+bool isSafe(vector<vector<int>>& board, int row, int col) {
+    int n = board.size();
+    int i, j;
+
+    // Check the left side of the current row
+    for (i = 0; i < col; i++)
+        if (board[row][i])
+            return false;
+
+    // Check the upper diagonal on the left
+    for (i = row, j = col; i >= 0 && j >= 0; i--, j--)
+        if (board[i][j])
+            return false;
+
+    // Check the lower diagonal on the left
+    for (i = row, j = col; j >= 0 && i < n; i++, j--)
+        if (board[i][j])
+            return false;
+
+    return true;
+}
+
+bool solveNQUtil(vector<vector<int>>& board, int col) {
+    int n = board.size();
+
+    // If all queens are placed, return true
+    if (col >= n)
+        return true;
+
+    for (int i = 0; i < n; i++) {
+        // Check if it's safe to place a queen at board[i][col]
+        if (isSafe(board, i, col)) {
+            board[i][col] = 1;
+
+            // Recur to place the rest of the queens
+            if (solveNQUtil(board, col + 1))
+                return true;
+
+            // If placing a queen at board[i][col] doesn't lead to a solution, backtrack
+            board[i][col] = 0;
+        }
+    }
+
+    return false;
+}
+
+bool solveNQ(int n) {
+    vector<vector<int>> board(n, vector<int>(n, 0));
+
+    if (solveNQUtil(board, 0) == false) {
+        cout << "Solution does not exist";
+        return false;
+    }
+
+    printSolution(board);
+    return true;
+}
+
+int main() {
+    int n = 4; // Default size of the chessboard
+    solveNQ(n);
+    return 0;
+}]`, `[#No.15 0/1 Knapsack using Backtracking
+    #include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+int knapsackBacktracking(const vector<int>& values, const vector<int>& weights, int capacity, int n) {
+    if (n == 0 || capacity == 0) {
+        return 0;
+    }
+    if (weights[n - 1] > capacity) {
+        return knapsackBacktracking(values, weights, capacity, n - 1);
+    }
+    int include = values[n - 1] + knapsackBacktracking(values, weights, capacity - weights[n - 1], n - 1);
+        int exclude = knapsackBacktracking(values, weights, capacity, n - 1);
+    return max(include, exclude);
+}
+
+int main() {
+    vector<int> values = {60, 100, 120}; 
+    vector<int> weights = {10, 20, 30};   
+    int capacity = 50;                    
+    int n = values.size();                
+    int maxValue = knapsackBacktracking(values, weights, capacity, n);
+    cout << "Maximum value in Knapsack = " << maxValue << endl;
+
+    return 0;
+}]`]
+  
+    // Variable to keep track of the current snippet index
+    let currentSnippetIndex = 0;
+  
+    // Function to cycle through code snippets
+    function cycleCode() {
+      const editor = document.getElementById('editor');
+  
+      // Clear any existing content
+      editor.textContent = '';
+  
+      // Set the current code snippet inside the editor
+      editor.textContent = codeSnippets[currentSnippetIndex];
+  
+      // Apply syntax highlighting using Prism.js
+      Prism.highlightElement(editor);
+  
+      // Update the index for the next snippet
+      currentSnippetIndex = (currentSnippetIndex + 1) % codeSnippets.length;
+    }
+  
+    // Initialize the first code snippet
+    cycleCode();
+  </script>
+  
+  
+  
+  
+  
 </body>
 
 </html>
